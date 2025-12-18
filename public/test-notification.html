@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Notification Socket.io</title>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Test Notification Véhicule Indisponible</h1>
+  <p>Ouvrez la console du navigateur (F12) pour voir les notifications.</p>
+
+  <script>
+    
+    const socket = io('http://localhost:3000');
+
+    socket.on('connect', () => {
+      console.log('Connecté au serveur Socket.io ! ID:', socket.id);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Déconnecté');
+    });
+
+    
+    socket.on('vehicleUnavailable', (data) => {
+      console.log('🔔 NOTIFICATION REÇUE :', data);
+      alert(`Véhicule indisponible : ${data.message}`);
+    });
+  </script>
+</body>
+</html>
